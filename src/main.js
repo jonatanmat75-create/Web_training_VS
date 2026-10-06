@@ -9,7 +9,7 @@ console.log("APP:", app);
    CONFIGURACIÓN DEL ADMINISTRADOR
    ========================================================= */
 
-const ADMIN_USER = "admin";
+const ADMIN_USER = "Admin";
 const ADMIN_PASSWORD = "Admin123*";
 
 /* =========================================================
