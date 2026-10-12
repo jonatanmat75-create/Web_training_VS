@@ -4,7 +4,7 @@ export function notification(
   text
 ) {
 
-  return `
+  return 
     <div class="notification-card">
 
       <span>${icon}</span>
@@ -18,5 +18,5 @@ export function notification(
       </div>
 
     </div>
-  `;
+  ;
 }
