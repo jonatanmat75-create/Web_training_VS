@@ -1,22 +1,28 @@
 export function notification(
+
   icon,
   title,
   text
 ) {
-
-  return 
+  return `
     <div class="notification-card">
 
-      <span>${icon}</span>
+      <span>
+        ${icon}
+      </span>
 
       <div>
 
-        <strong>${title}</strong>
+        <strong>
+          ${title}ss
+        </strong>
 
-        <p>${text}</p>
+        <p>
+          ${text}
+        </p>
 
       </div>
 
     </div>
-  ;
+  `;
 }

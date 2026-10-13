@@ -1,5 +1,8 @@
-dashboard: `
-    <section class="screen">
+import { courseCard } from "../components/CourseCard";
+import { bottomNavigation } from "../components/BottomNavigation";
+
+export const dashboard = `
+<section class="screen">
 
       <header class="app-header">
 
@@ -150,4 +153,4 @@ dashboard: `
       ${bottomNavigation()}
 
     </section>
-  `,
+  `

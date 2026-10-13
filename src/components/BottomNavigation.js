@@ -1,6 +1,5 @@
 export function bottomNavigation() {
-
-  return 
+  return `
     <nav class="bottom-navigation">
 
       <button data-screen="dashboard">
@@ -24,5 +23,5 @@ export function bottomNavigation() {
       </button>
 
     </nav>
-  ;
+  `;
 }

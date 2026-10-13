@@ -1,4 +1,5 @@
-recuperar: `
+export const recuperar = `
+
     <section class="screen">
 
       <header class="simple-header">

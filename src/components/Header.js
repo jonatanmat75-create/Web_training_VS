@@ -1,6 +1,7 @@
 export function pageHeader(title, back) {
-  return 
+  return `
     <header class="simple-header">
+
       <button
         class="back-button"
         data-screen="${back}"
@@ -13,5 +14,5 @@ export function pageHeader(title, back) {
       </h1>
 
     </header>
-  ;
+  `;
 }

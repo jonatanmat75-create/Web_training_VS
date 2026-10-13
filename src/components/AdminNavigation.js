@@ -1,6 +1,5 @@
 export function adminNavigation() {
-
-  return 
+  return `
     <nav class="bottom-navigation">
 
       <button data-screen="admin">
@@ -29,5 +28,5 @@ export function adminNavigation() {
       </button>
 
     </nav>
-  ;
+  `;
 }

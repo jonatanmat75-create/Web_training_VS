@@ -4,8 +4,7 @@ export function courseCard(
   title,
   description
 ) {
-
-  return 
+  return `
     <article class="course-card">
 
       <div class="course-image">
@@ -32,5 +31,5 @@ export function courseCard(
       </div>
 
     </article>
-  ;
+  `;
 }
