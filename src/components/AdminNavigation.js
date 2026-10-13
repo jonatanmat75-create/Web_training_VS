@@ -1,4 +1,5 @@
 export function adminNavigation() {
+
   return `
     <nav class="bottom-navigation">
 

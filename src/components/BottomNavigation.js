@@ -2,24 +2,39 @@ export function bottomNavigation() {
   return `
     <nav class="bottom-navigation">
 
-      <button data-screen="dashboard">
+      <button data-screen="admin">
         🏠
-        <span>Inicio</span>
+        <span>
+          Inicio
+        </span>
+      </button>
+
+      <button data-screen="usuarios">
+        👥
+        <span>
+          Usuarios
+        </span>
       </button>
 
       <button data-screen="cursos">
         📚
-        <span>Cursos</span>
+        <span>
+          Cursos
+        </span>
       </button>
 
-      <button data-screen="evaluaciones">
-        📝
-        <span>Evaluaciones</span>
+      <button data-screen="certificados">
+        🏆
+        <span>
+          Certificados
+        </span>
       </button>
 
       <button data-screen="perfil">
         👤
-        <span>Perfil</span>
+        <span>
+          Perfil
+        </span>
       </button>
 
     </nav>

@@ -91,6 +91,7 @@ const screens = {
 
 function render(screen) {
 
+  console.log("RENDER;", screen);
   /*
    * Si se intenta entrar a una pantalla administrativa
    * sin ser administrador, se devuelve al inicio.
@@ -120,7 +121,7 @@ function render(screen) {
    */
 
   app.innerHTML =
-    screens[screen] || screens.inicio;
+  screens[screen] || screens.inicio;
 
   console.log(
     "PANTALLA CARGADA:",
@@ -783,21 +784,14 @@ function loadUser() {
    INICIO DE LA APLICACIÓN
    ========================================================= */
 
-const currentUser =
-  getCurrentUser();
+const currentUser = getCurrentUser();
 
 if (currentUser) {
 
-  if (
-    currentUser.role === "admin"
-  ) {
-
+  if (currentUser.role === "admin") {
     render("admin");
-
   } else {
-
     render("dashboard");
-
   }
 
 } else {
