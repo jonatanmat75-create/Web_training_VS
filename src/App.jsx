@@ -1,17 +1,22 @@
+import { useState } from "react";
+import Inicio from "./screens/Inicio.jsx";
+import Login from "./screens/Login.jsx";
+import Registro from "./screens/Registro.jsx";
+
 export default function App() {
-  return (
-    <main className="screen">
-      <section className="hero">
-        <div className="hero-content">
-          <div className="hero-icon">🎓</div>
+  const [pantalla, setPantalla] = useState("inicio");
 
-          <h1>Web Training Empresarial</h1>
+  const navegar = (destino) => {
+    setPantalla(destino);
+  };
 
-          <p>
-            Migración inicial del proyecto a React realizada correctamente.
-          </p>
-        </div>
-      </section>
-    </main>
-  );
+  if (pantalla === "login") {
+    return <Login onNavigate={navegar} />;
+  }
+
+  if (pantalla === "registro") {
+    return <Registro onNavigate={navegar} />;
+  }
+
+  return <Inicio onNavigate={navegar} />;
 }
