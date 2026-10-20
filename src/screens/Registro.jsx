@@ -1,28 +1,114 @@
 import { useState } from "react";
+import { useState } from "react";
+import { solicitudApi } from "../services/api.js";
 
 export default function Registro({ onNavigate }) {
   const [formulario, setFormulario] = useState({
     nombre: "",
-    documento: "",
     correo: "",
-    contrasena: ""
+    password: "",
+    confirmarPassword: "",
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const [mensaje, setMensaje] = useState("");
+  const [tipoMensaje, setTipoMensaje] = useState("");
 
-    setFormulario((datosActuales) => ({
-      ...datosActuales,
-      value
+  const actualizarCampo = (evento) => {
+    const { name, value } = evento.target;
+
+    setFormulario((datosAnteriores) => ({
+      ...datosAnteriores,
+      [name]: value,
     }));
+
+    setMensaje("");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const registrarUsuario = (evento) => {
+    evento.preventDefault();
 
-    console.log("Datos del registro:", formulario);
+    const nombre = formulario.nombre.trim();
+    const correo = formulario.correo.trim().toLowerCase();
+    const password = formulario.password;
+    const confirmarPassword = formulario.confirmarPassword;
 
-    alert("Formulario de registro enviado.");
+    if (!nombre || !correo || !password || !confirmarPassword) {
+      setMensaje("Por favor, completa todos los campos.");
+      setTipoMensaje("error");
+      return;
+    }
+
+    if (!correo.includes("@") || !correo.includes(".")) {
+      setMensaje("Ingresa un correo electrónico válido.");
+      setTipoMensaje("error");
+      return;
+    }
+
+    if (password.length < 6) {
+      setMensaje(
+        "La contraseña debe tener mínimo 6 caracteres."
+      );
+      setTipoMensaje("error");
+      return;
+    }
+
+    if (password !== confirmarPassword) {
+      setMensaje("Las contraseñas no coinciden.");
+      setTipoMensaje("error");
+      return;
+    }
+
+    const usuariosGuardados = JSON.parse(
+      localStorage.getItem("usuariosWebTraining") || "[]"
+    );
+
+    const correoRegistrado = usuariosGuardados.some(
+      (usuario) => usuario.correo === correo
+    );
+
+    if (correoRegistrado) {
+      setMensaje(
+        "Ya existe un usuario registrado con este correo."
+      );
+      setTipoMensaje("error");
+      return;
+    }
+
+    const nuevoUsuario = {
+      id: Date.now(),
+      nombre,
+      correo,
+      password,
+      rol: "usuario",
+      estado: "Activo",
+      fechaRegistro: new Date().toISOString(),
+    };
+
+    const usuariosActualizados = [
+      ...usuariosGuardados,
+      nuevoUsuario,
+    ];
+
+    localStorage.setItem(
+      "usuariosWebTraining",
+      JSON.stringify(usuariosActualizados)
+    );
+
+    setMensaje(
+      "Usuario registrado correctamente. Redirigiendo al inicio de sesión..."
+    );
+    setTipoMensaje("exito");
+
+    setFormulario({
+      nombre: "",
+      correo: "",
+      password: "",
+      confirmarPassword: "",
+    });
+
+    setTimeout(() => {
+      onNavigate("login");
+    }, 1200);
   };
 
   return (
@@ -31,6 +117,7 @@ export default function Registro({ onNavigate }) {
         <button
           className="back-button"
           type="button"
+          aria-label="Volver al inicio"
           onClick={() => onNavigate("inicio")}
         >
           ←
@@ -40,89 +127,108 @@ export default function Registro({ onNavigate }) {
       </header>
 
       <main className="form-container">
-        <div className="form-card">
+        <form
+          className="form-card"
+          onSubmit={registrarUsuario}
+        >
           <div className="form-icon">📝</div>
 
-          <h2>Registro</h2>
+          <h2>Registro de usuario</h2>
 
           <p className="form-description">
-            Complete la información para crear su cuenta.
+            Crea una cuenta para acceder a los cursos,
+            evaluaciones y certificados de Web Training.
           </p>
 
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="registerName">
-                Nombre completo
-              </label>
-
-              <input
-                id="registerName"
-                name="nombre"
-                type="text"
-                placeholder="Nombre completo"
-                value={formulario.nombre}
-                onChange={handleChange}
-                required
-              />
+          {mensaje && (
+            <div
+              className={
+                tipoMensaje === "exito"
+                  ? "form-message success"           : "form-message error"
+              }
+              role="alert"
+            >
+              {mensaje}
             </div>
+          )}
 
-            <div className="form-group">
-              <label htmlFor="registerDocument">
-                Documento
-              </label>
+          <div className="form-group">
+            <label htmlFor="nombre">Nombre completo</label>
 
-              <input
-                id="registerDocument"
-                name="documento"
-                type="text"
-                inputMode="numeric"
-                placeholder="Número de documento"
-                value={formulario.documento}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              placeholder="Ingresa tu nombre completo"
+              value={formulario.nombre}
+              onChange={actualizarCampo}
+              autoComplete="name"
+            />
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="registerEmail">
-                Correo electrónico
-              </label>
+          <div className="form-group">
+            <label htmlFor="correo">Correo electrónico</label>
 
-              <input
-                id="registerEmail"
-                name="correo"
-                type="email"
-                placeholder="correo@empresa.com"
-                value={formulario.correo}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            <input
+              id="correo"
+              name="correo"
+              type="email"
+              placeholder="nombre@empresa.com"
+              value={formulario.correo}
+              onChange={actualizarCampo}
+              autoComplete="email"
+            />
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="registerPassword">
-                Contraseña
-              </label>
+          <div className="form-group">
+            <label htmlFor="password">Contraseña</label>
 
-              <input
-                id="registerPassword"
-                name="contrasena"
-                type="password"
-                placeholder="Crear contraseña"
-                value={formulario.contrasena}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Mínimo 6 caracteres"
+              value={formulario.password}
+              onChange={actualizarCampo}
+              autoComplete="new-password"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmarPassword">
+              Confirmar contraseña
+            </label>
+
+            <input
+              id="confirmarPassword"
+              name="confirmarPassword"
+              type="password"
+              placeholder="Repite tu contraseña"
+              value={formulario.confirmarPassword}
+              onChange={actualizarCampo}
+              autoComplete="new-password"
+            />
+          </div>
+
+          <button
+            className="btn btn-primary btn-full"
+            type="submit"
+          >
+            📝 Crear cuenta
+          </button>
+
+          <p className="register-text">
+            ¿Ya tienes una cuenta?
 
             <button
-              className="btn btn-primary btn-full"
-              type="submit"
+              className="inline-link"
+              type="button"
+              onClick={() => onNavigate("login")}
             >
-              ✅ Crear cuenta
+              Iniciar sesión
             </button>
-          </form>
-        </div>
+          </p>
+        </form>
       </main>
     </section>
   );

@@ -1,25 +1,32 @@
 export default function Inicio({ onNavigate }) {
   return (
     <section className="screen">
-      <header className="public-header">
+      <div className="public-header">
         <div className="brand">
-          <div className="brand-icon">🎓</div>
+          <div className="brand-icon">
+            🎓
+          </div>
 
-          <div className="brand-text">
+          <div>
             <h1>Web Training</h1>
             <span>Empresarial</span>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="hero">
         <div className="hero-content">
-          <div className="hero-icon">🎓</div>
+          <div className="hero-icon">
+            🎓
+          </div>
 
-          <h2>Capacitación empresarial</h2>
+          <h2>
+            Capacitación empresarial
+          </h2>
 
           <p>
-            Aprende, evalúa tus conocimientos, consulta tu progreso y obtén tus
+            Aprende, evalúa tus conocimientos,
+            consulta tu progreso y obtén tus
             certificados.
           </p>
 

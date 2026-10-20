@@ -1159,3 +1159,207 @@ input:focus-visible {
   }
 
 }
+
+/* =========================================================
+   Prueba .jsx
+   ========================================================= */
+
+.profile-row p {
+  color: #68758a;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.btn-secondary {
+  background: #edf3fb;
+  color: #172033;
+}
+
+.btn-secondary:hover {
+  background: #dbe7f8;
+}
+/* =========================================================
+   BARRA INFERIOR CON ICONOS SVG
+   ========================================================= */
+
+.bottom-navigation {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  min-height: 74px;
+  padding: 7px 10px
+    calc(7px + env(safe-area-inset-bottom));
+
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid #dfe5ee;
+  box-shadow: 0 -5px 20px rgba(20, 40, 80, 0.09);
+
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.bottom-navigation .bottom-navigation-item {
+  min-width: 0;
+  min-height: 58px;
+  padding: 5px 3px;
+
+  border: 0;
+  border-radius: 13px;
+  background: transparent;
+  color: #657287;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.bottom-navigation .bottom-navigation-item:hover {
+  color: #0d6efd;
+  background: #edf4ff;
+}
+
+.bottom-navigation .bottom-navigation-item.active {
+  color: #0d6efd;
+  background: #e8f1ff;
+}
+
+.bottom-navigation-icon {
+  width: 28px;
+  height: 28px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-navigation-icon svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bottom-navigation-item:hover
+  .bottom-navigation-icon svg {
+  transform: translateY(-1px);
+}
+
+.bottom-navigation-item.active
+  .bottom-navigation-icon svg {
+  transform: scale(1.08);
+}
+
+.bottom-navigation-text {
+  width: 100%;
+  overflow: hidden;
+
+  color: currentColor;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottom-navigation-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+
+  border: 2px solid white;
+  border-radius: 10px;
+  background: #dc3545;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Evita que el contenido quede detrás de la barra */
+
+.admin-content,
+.app-content,
+.page-content {
+  padding-bottom: 115px;
+}
+
+@media (max-width: 600px) {
+  .bottom-navigation {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .bottom-navigation .bottom-navigation-item {
+    min-height: 54px;
+    border-radius: 10px;
+  }
+
+  .bottom-navigation-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .bottom-navigation-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottom-navigation-text {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .bottom-navigation-text {
+    font-size: 9px;
+  }
+}
+/* Mensajes del formulario de registro */
+
+.form-message {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-message.error {
+  color: #842029;
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
+}
+
+.form-message.success {
+  color: #0f5132;
+  background: #d1e7dd;
+  border: 1px solid #badbcc;
+}
