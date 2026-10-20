@@ -91,7 +91,7 @@ const screens = {
 
 function render(screen) {
 
-  console.log("RENDER;", screen);
+  console.log("RENDER;", screen); 
   /*
    * Si se intenta entrar a una pantalla administrativa
    * sin ser administrador, se devuelve al inicio.
